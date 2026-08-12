@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sobour Dylan Yaya Olatoundji | Portfolio</title>
   <style>
-    /* --- DESIGN & CSS INTEGRÉ --- */
+    /* --- RESET & VARIABLES --- */
     :root {
-      --bg-color: #0f172a;
-      --card-bg: #1e293b;
+      --bg-color: #0b0f19;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.1);
       --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent: #2563eb;
-      --accent-hover: #1d4ed8;
-      --border: #334155;
-      --link-color: #38bdf8;
+      --text-muted: #cbd5e1;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --accent: #06b6d4;
     }
 
     * {
@@ -25,121 +25,179 @@
 
     body {
       background-color: var(--bg-color);
+      /* Image d'arrière-plan avec filtre sombre pour garantir la lisibilité */
+      background-image: linear-gradient(135deg, rgba(11, 15, 25, 0.92), rgba(15, 23, 42, 0.95)), 
+                        url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1920&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
       color: var(--text-main);
-      font-family: system-ui, -apple-system, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       line-height: 1.6;
+      min-height: 100vh;
     }
 
     a {
-      color: var(--link-color);
+      color: var(--primary);
       text-decoration: none;
+      transition: color 0.2s;
     }
 
     a:hover {
-      text-decoration: underline;
+      color: var(--accent);
     }
 
-    /* Navigation */
+    /* --- NAVIGATION --- */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1.5rem 2rem;
-      border-bottom: 1px solid var(--border);
-      max-width: 1000px;
+      border-bottom: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      background: rgba(11, 15, 25, 0.6);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      max-width: 1100px;
       margin: 0 auto;
+      border-radius: 0 0 16px 16px;
     }
 
     .logo {
-      font-weight: bold;
-      font-size: 1.2rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .navbar nav {
       display: flex;
-      gap: 20px;
+      gap: 24px;
     }
 
     .navbar nav a {
       color: var(--text-muted);
+      font-weight: 500;
     }
 
-    /* En-tête / Profil */
+    .navbar nav a:hover {
+      color: var(--text-main);
+    }
+
+    /* --- SECTION HERO --- */
     .hero {
       text-align: center;
-      padding: 4rem 1rem 3rem;
-      max-width: 800px;
+      padding: 5rem 1.5rem 3rem;
+      max-width: 850px;
       margin: 0 auto;
     }
 
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: var(--accent);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
     .hero h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.5rem;
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #ffffff, var(--text-muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .subtitle {
       color: var(--text-muted);
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
     }
 
-    .contact-info {
-      margin-top: 1.5rem;
+    .contact-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: inline-block;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
 
     .phone-link {
       font-size: 1.1rem;
-      font-weight: 500;
       color: var(--text-main);
+      font-weight: 600;
     }
 
-    /* Bouton CV */
     .btn-cv {
-      display: inline-block;
-      background-color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
       color: #ffffff !important;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-weight: bold;
+      padding: 12px 28px;
+      border-radius: 10px;
+      font-weight: 600;
       text-decoration: none !important;
-      margin-top: 1rem;
-      transition: background 0.2s;
+      margin-top: 1.2rem;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .btn-cv:hover {
-      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
     }
 
-    /* Section Projets */
+    /* --- SECTION PROJETS --- */
     .projects-section {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 3rem 1rem;
+      padding: 4rem 1.5rem;
     }
 
     .projects-section h2 {
-      font-size: 1.8rem;
-      margin-bottom: 2rem;
+      font-size: 2rem;
+      margin-bottom: 2.5rem;
       text-align: center;
+      position: relative;
     }
 
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
     }
 
     .project-card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 2rem;
       display: flex;
       flex-direction: column;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(59, 130, 246, 0.5);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
     }
 
     .project-card h3 {
-      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
       color: var(--text-main);
     }
 
@@ -147,29 +205,41 @@
       color: var(--text-muted);
       font-size: 0.95rem;
       flex-grow: 1;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.5rem;
     }
 
-    /* Pied de page */
+    .project-link {
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* --- FOOTER --- */
     .footer {
       text-align: center;
-      padding: 3rem 1rem 2rem;
-      border-top: 1px solid var(--border);
-      margin-top: 3rem;
+      padding: 3rem 1.5rem;
+      border-top: 1px solid var(--card-border);
+      background: rgba(11, 15, 25, 0.8);
+      backdrop-filter: blur(10px);
+      margin-top: 4rem;
     }
 
     .social-links {
       display: flex;
       justify-content: center;
-      gap: 15px;
+      align-items: center;
+      gap: 20px;
       margin: 1.5rem 0;
-      color: var(--text-muted);
+    }
+
+    .social-links a {
+      font-weight: 600;
     }
 
     .copyright {
       color: var(--text-muted);
       font-size: 0.85rem;
-      margin-top: 1rem;
     }
   </style>
 </head>
@@ -187,58 +257,58 @@
     </nav>
   </header>
 
-  <!-- PRESENTATION -->
+  <!-- PRESENTATION HERO -->
   <section class="hero" id="about">
+    <span class="badge">Disponible pour opportunités</span>
     <h1>Sobour Dylan Yaya Olatoundji</h1>
-    <p class="subtitle">Étudiant en Génie Logiciel & Développeur Web</p>
+    <p class="subtitle">Étudiant en Génie Logiciel & Développeur Web Junior</p>
     
-    <div class="contact-info">
-      <p class="phone-link">📞 <a href="tel:+221764455114">+221 76 445 51 14</a></p>
+    <div class="contact-card">
+      <p class="phone-link">📞 Téléphone : <a href="tel:+221764455114">+221 76 445 51 14</a></p>
       <a href="cv.pdf" download="CV_Sobour_Dylan_Yaya_Olatoundji.pdf" class="btn-cv">
         📥 Télécharger mon CV
       </a>
     </div>
   </section>
 
-  <!-- MES PROJETS -->
+  <!-- SECTION PROJETS -->
   <section class="projects-section" id="projects">
-    <h2>Mes Projets Réalisés</h2>
+    <h2>Projets Réalisés</h2>
     
     <div class="projects-grid">
       
       <!-- Projet 1 -->
       <div class="project-card">
         <h3>UrbaNova</h3>
-        <p>Plateforme numérique pour signaler les problèmes urbains et soutenir l'e-gouvernance locale à Dakar.</p>
-        <a href="https://github.com/YOSOBOUR" target="_blank" rel="noopener">Voir sur GitHub →</a>
+        <p>Plateforme numérique dynamique pour signaler les incidents urbains et soutenir l'e-gouvernance locale à Dakar.</p>
+        <a href="https://github.com/YOSOBOUR" target="_blank" rel="noopener" class="project-link">Voir sur GitHub →</a>
       </div>
 
       <!-- Projet 2 -->
       <div class="project-card">
         <h3>Apache Spark - Big Data</h3>
-        <p>Mise en œuvre et traitement de données avec la technologie NoSQL / Big Data Apache Spark.</p>
-        <a href="https://github.com/YOSOBOUR" target="_blank" rel="noopener">Voir sur GitHub →</a>
+        <p>Mise en œuvre, traitement analytique de données massives et configuration NoSQL avec Apache Spark.</p>
+        <a href="https://github.com/YOSOBOUR" target="_blank" rel="noopener" class="project-link">Voir sur GitHub →</a>
       </div>
 
       <!-- Projet 3 -->
       <div class="project-card">
-        <h3>Projets Web & Mobile</h3>
-        <p>Applications interactives développées avec des technologies modernes (React, Django, Java, PHP).</p>
-        <a href="https://github.com/YOSOBOUR" target="_blank" rel="noopener">Voir sur GitHub →</a>
+        <h3>Applications Web & Mobile</h3>
+        <p>Développement de solutions applicatives interactives basées sur des architectures modernes (React, Django, Java, PHP).</p>
+        <a href="https://github.com/YOSOBOUR" target="_blank" rel="noopener" class="project-link">Voir sur GitHub →</a>
       </div>
 
     </div>
   </section>
 
-  <!-- PIED DE PAGE / CONTACT -->
+  <!-- FOOTER -->
   <footer id="contact" class="footer">
     <h2>Me contacter</h2>
-    <p>Téléphone : <a href="tel:+221764455114">+221 76 445 51 14</a></p>
-    <p>Email : <a href="mailto:sobouryayaolatoundji@gmail.com">sobouryayaolatoundji@gmail.com</a></p>
+    <p style="margin-top: 0.5rem;">Email : <a href="mailto:sobouryayaolatoundji@gmail.com">sobouryayaolatoundji@gmail.com</a></p>
 
     <div class="social-links">
       <a href="https://github.com/YOSOBOUR" target="_blank" rel="noopener">GitHub</a>
-      <span>•</span>
+      <span style="color: var(--card-border);">•</span>
       <a href="https://www.linkedin.com/in/sobour-dylan-yaya-olatoundji-146552298/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
 
