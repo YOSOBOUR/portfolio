@@ -1,31 +1,20 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UrbaNova — Plateforme de Gestion & Suivi Urbain</title>
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  
-  <!-- FontAwesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
-  <!-- Lenis CSS (Smooth Scroll) -->
-  <link rel="stylesheet" href="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.css" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobour Dylan Yaya Olatoundji | Portfolio</title>
   <style>
+    /* --- DESIGN & CSS INTEGRÉ --- */
     :root {
-      --bg-color: #08090a;
-      --accent-color: #00f2fe;
-      --text-color: #f0f4f8;
-      --card-bg: rgba(255, 255, 255, 0.03);
-      --card-border: rgba(255, 255, 255, 0.08);
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --border: #334155;
+      --link-color: #38bdf8;
     }
 
     * {
@@ -36,517 +25,225 @@
 
     body {
       background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      overflow-x: hidden;
-    }
-
-    /* Arrière-plan WebGL 3D fixe */
-    #webgl-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    /* Navigation */
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      padding: 1.5rem 4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 100;
-      backdrop-filter: blur(12px);
-      background: rgba(8, 9, 10, 0.5);
-      border-bottom: 1px solid var(--card-border);
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      color: #fff;
-    }
-
-    .logo span {
-      color: var(--accent-color);
-    }
-
-    nav a {
-      color: var(--text-color);
-      text-decoration: none;
-      margin-left: 2rem;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: var(--accent-color);
-    }
-
-    /* Hero Section */
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 0 10vw;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      background: rgba(0, 242, 254, 0.1);
-      border: 1px solid rgba(0, 242, 254, 0.2);
-      color: var(--accent-color);
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero h1 {
-      font-size: clamp(3rem, 6vw, 5.5rem);
-      line-height: 1.05;
-      font-weight: 800;
-      max-width: 900px;
-      margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, #ffffff 30%, rgba(255,255,255,0.4) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      font-size: 1.25rem;
-      color: #8a8d93;
-      max-width: 600px;
-      margin-bottom: 2.5rem;
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, sans-serif;
       line-height: 1.6;
     }
 
-    .btn-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 1rem 2rem;
-      border-radius: 12px;
-      background: #ffffff;
-      color: #000;
-      font-weight: 700;
+    a {
+      color: var(--link-color);
       text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .btn-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+    a:hover {
+      text-decoration: underline;
     }
 
-    /* Section Carte */
-    .app-section {
-      min-height: 100vh;
-      padding: 6rem 10vw;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-    }
-
-    .section-subtitle {
-      color: #8a8d93;
-      margin-bottom: 2rem;
-    }
-
-    .map-container-wrapper {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 24px;
-      padding: 1.5rem;
-      backdrop-filter: blur(20px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    }
-
-    #map {
-      height: 600px;
-      width: 100%;
-      border-radius: 16px;
-    }
-
-    /* Style Sombre Carte Leaflet */
-    .leaflet-tile {
-      filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
-    }
-
-    .leaflet-container {
-      background: #000 !important;
-    }
-
-    /* Modal Glassmorphism */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.75);
-      backdrop-filter: blur(12px);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-content {
-      background: rgba(18, 20, 24, 0.95);
-      border: 1px solid var(--card-border);
-      padding: 2.5rem;
-      border-radius: 24px;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-    }
-
-    .modal-header {
+    /* Navigation */
+    .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .navbar nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar nav a {
+      color: var(--text-muted);
+    }
+
+    /* En-tête / Profil */
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem 3rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
       margin-bottom: 1.5rem;
     }
 
-    .modal-header h3 {
-      font-size: 1.4rem;
-      color: #fff;
+    .contact-info {
+      margin-top: 1.5rem;
     }
 
-    .close-btn {
-      background: none;
-      border: none;
-      color: #8a8d93;
+    .phone-link {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    /* Bouton CV */
+    .btn-cv {
+      display: inline-block;
+      background-color: var(--accent);
+      color: #ffffff !important;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none !important;
+      margin-top: 1rem;
+      transition: background 0.2s;
+    }
+
+    .btn-cv:hover {
+      background-color: var(--accent-hover);
+    }
+
+    /* Section Projets */
+    .projects-section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 3rem 1rem;
+    }
+
+    .projects-section h2 {
       font-size: 1.8rem;
-      cursor: pointer;
-      transition: color 0.2s;
+      margin-bottom: 2rem;
+      text-align: center;
     }
 
-    .close-btn:hover {
-      color: #fff;
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
     }
 
-    .modal-content label {
-      display: block;
-      margin-top: 1.2rem;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #aaa;
-    }
-
-    .modal-content input, 
-    .modal-content select, 
-    .modal-content textarea {
-      width: 100%;
-      padding: 0.9rem;
-      margin-top: 0.4rem;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--card-border);
+    .project-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
       border-radius: 10px;
-      color: #fff;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.2s;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
     }
 
-    .modal-content input:focus, 
-    .modal-content select:focus, 
-    .modal-content textarea:focus {
-      border-color: var(--accent-color);
+    .project-card h3 {
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .project-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      flex-grow: 1;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Pied de page */
+    .footer {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 1.5rem 0;
+      color: var(--text-muted);
+    }
+
+    .copyright {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 1rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Canvas WebGL 3D en arrière-plan -->
-  <canvas id="webgl-canvas"></canvas>
-
-  <!-- En-tête / Navigation -->
-  <header>
-    <div class="logo">URBA<span>NOVA</span></div>
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <div class="logo">
+      <span>Sobour Dylan</span>
+    </div>
     <nav>
-      <a href="#hero">Accueil</a>
-      <a href="#map-section">Carte Interactive</a>
+      <a href="#about">À propos</a>
+      <a href="#projects">Projets</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <div class="hero-badge">
-      <i class="fa-solid fa-city"></i> Plateforme Urbaine Interactive
-    </div>
-    <h1>Signalez. Suivez. Améliorez votre ville.</h1>
-    <p>Une interface temps réel nouvelle génération connectant citoyens et services municipaux pour un espace urbain réactif.</p>
-    <a href="#map-section" class="btn-cta">
-      Explorer la carte <i class="fa-solid fa-arrow-right"></i>
-    </a>
-  </section>
-
-  <!-- Section Carte Interactive -->
-  <section class="app-section" id="map-section">
-    <h2 class="section-title">Signalements en Direct</h2>
-    <p class="section-subtitle">Cliquez n'importe où sur la carte pour créer un nouveau signalement.</p>
-    <div class="map-container-wrapper">
-      <div id="map"></div>
+  <!-- PRESENTATION -->
+  <section class="hero" id="about">
+    <h1>Sobour Dylan Yaya Olatoundji</h1>
+    <p class="subtitle">Étudiant en Génie Logiciel & Développeur Web</p>
+    
+    <div class="contact-info">
+      <p class="phone-link">📞 <a href="tel:+221764455114">+221 76 445 51 14</a></p>
+      <a href="cv.pdf" download="CV_Sobour_Dylan_Yaya_Olatoundji.pdf" class="btn-cv">
+        📥 Télécharger mon CV
+      </a>
     </div>
   </section>
 
-  <!-- Modal de Nouveau Signalement -->
-  <div id="modal-signalement" class="modal-overlay">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3><i class="fa-solid fa-location-dot" style="color: var(--accent-color);"></i> Nouveau Signalement</h3>
-        <button class="close-btn" onclick="fermerModal()">&times;</button>
-      </div>
-      <form id="form-signalement">
-        <input type="hidden" id="lat" name="lat" />
-        <input type="hidden" id="lng" name="lng" />
-
-        <label for="titre">Titre de l'incident</label>
-        <input type="text" id="titre" name="titre" required placeholder="ex: Nid de poule, Éclairage HS" />
-
-        <label for="categorie">Catégorie</label>
-        <select id="categorie" name="categorie" required>
-          <option value="Voirie">Voirie</option>
-          <option value="Éclairage">Éclairage</option>
-          <option value="Propreté">Propreté / Salubrité</option>
-          <option value="Espaces Verts">Espaces Verts</option>
-          <option value="Sécurité">Sécurité</option>
-        </select>
-
-        <label for="description">Description</label>
-        <textarea id="description" name="description" rows="3" required placeholder="Décrivez le problème constaté..."></textarea>
-
-        <button type="submit" class="btn-cta" style="width: 100%; justify-content: center; margin-top: 1.5rem;">
-          Transmettre le signalement
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Bibliothèques JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-  <script>
-    /* 1. SMOOTH SCROLLING (Lenis) */
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    /* 2. SCÈNE 3D INTERACTIVE (Three.js) */
-    const canvas = document.getElementById('webgl-canvas');
-    const scene = new THREE.Scene();
-
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 4;
-
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    // Sphere Grille 3D Futuriste
-    const geometry = new THREE.IcosahedronGeometry(2, 4);
-    const material = new THREE.MeshBasicMaterial({
-      color: 0x00f2fe,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.25
-    });
-    const globe = new THREE.Mesh(geometry, material);
-    scene.add(globe);
-
-    // Nuage de points lumineux
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 800;
-    const posArray = new Float32Array(particlesCount * 3);
-
-    for (let i = 0; i < particlesCount * 3; i++) {
-      posArray[i] = (Math.random() - 0.5) * 12;
-    }
-
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.02,
-      color: 0xffffff,
-      transparent: true,
-      opacity: 0.6
-    });
-    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(particlesMesh);
-
-    // Parallaxe Souris
-    let mouseX = 0;
-    let mouseY = 0;
-
-    window.addEventListener('mousemove', (e) => {
-      mouseX = (e.clientX / window.innerWidth) - 0.5;
-      mouseY = (e.clientY / window.innerHeight) - 0.5;
-    });
-
-    // Animation 3D au Scroll
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.to(globe.rotation, {
-      y: Math.PI * 2,
-      x: Math.PI,
-      scrollTrigger: {
-        trigger: "body",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1.5
-      }
-    });
-
-    gsap.to(globe.position, {
-      z: -2,
-      scrollTrigger: {
-        trigger: "#map-section",
-        start: "top bottom",
-        end: "top top",
-        scrub: 1
-      }
-    });
-
-    // Boucle de Rendu
-    const clock = new THREE.Clock();
-
-    function tick() {
-      const elapsedTime = clock.getElapsedTime();
-
-      globe.rotation.y = elapsedTime * 0.05;
-      particlesMesh.rotation.y = -elapsedTime * 0.02;
-
-      globe.rotation.x += (mouseY * 0.5 - globe.rotation.x) * 0.05;
-      globe.rotation.y += (mouseX * 0.5 - globe.rotation.y) * 0.05;
-
-      renderer.render(scene, camera);
-      window.requestAnimationFrame(tick);
-    }
-    tick();
-
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    /* 3. CARTE INTERACTIVE LEAFLET & API CONNECTIVITY */
-    const map = L.map('map').setView([48.8566, 2.3522], 13); // Paris par défaut
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '© OpenStreetMap'
-    }).addTo(map);
-
-    // Charger les signalements depuis /liste-signalements
-    async function chargerSignalements() {
-      try {
-        const response = await fetch('/liste-signalements');
-        if (!response.ok) return;
-        const signalements = await response.json();
-
-        signalements.forEach(item => {
-          if (item.lat && item.lng) {
-            const marker = L.marker([item.lat, item.lng]).addTo(map);
-            marker.bindPopup(`
-              <div style="color: #000; font-family: sans-serif; padding: 5px;">
-                <h4 style="margin: 0 0 5px 0;">${item.titre}</h4>
-                <p style="margin: 0 0 5px 0; font-size: 0.85rem;">${item.description}</p>
-                <small><b>Catégorie:</b> ${item.categorie || 'Général'}</small><br/>
-                <small><b>Statut:</b> <span style="color: green;">${item.statut || 'En attente'}</span></small>
-              </div>
-            `);
-          }
-        });
-      } catch (error) {
-        console.error('Erreur chargement signalements :', error);
-      }
-    }
-
-    chargerSignalements();
-
-    // Gestion du Clic sur la carte pour ouvrir le Modal
-    let tempMarker = null;
-
-    map.on('click', function(e) {
-      const { lat, lng } = e.latlng;
+  <!-- MES PROJETS -->
+  <section class="projects-section" id="projects">
+    <h2>Mes Projets Réalisés</h2>
+    
+    <div class="projects-grid">
       
-      document.getElementById('lat').value = lat;
-      document.getElementById('lng').value = lng;
+      <!-- Projet 1 -->
+      <div class="project-card">
+        <h3>UrbaNova</h3>
+        <p>Plateforme numérique pour signaler les problèmes urbains et soutenir l'e-gouvernance locale à Dakar.</p>
+        <a href="https://github.com/YOSOBOUR" target="_blank" rel="noopener">Voir sur GitHub →</a>
+      </div>
 
-      if (tempMarker) map.removeLayer(tempMarker);
-      tempMarker = L.marker([lat, lng]).addTo(map);
+      <!-- Projet 2 -->
+      <div class="project-card">
+        <h3>Apache Spark - Big Data</h3>
+        <p>Mise en œuvre et traitement de données avec la technologie NoSQL / Big Data Apache Spark.</p>
+        <a href="https://github.com/YOSOBOUR" target="_blank" rel="noopener">Voir sur GitHub →</a>
+      </div>
 
-      document.getElementById('modal-signalement').style.display = 'flex';
-    });
+      <!-- Projet 3 -->
+      <div class="project-card">
+        <h3>Projets Web & Mobile</h3>
+        <p>Applications interactives développées avec des technologies modernes (React, Django, Java, PHP).</p>
+        <a href="https://github.com/YOSOBOUR" target="_blank" rel="noopener">Voir sur GitHub →</a>
+      </div>
 
-    function fermerModal() {
-      document.getElementById('modal-signalement').style.display = 'none';
-      if (tempMarker) {
-        map.removeLayer(tempMarker);
-        tempMarker = null;
-      }
-    }
+    </div>
+  </section>
 
-    // Soumission du Formulaire vers /signaler
-    document.getElementById('form-signalement').addEventListener('submit', async (e) => {
-      e.preventDefault();
+  <!-- PIED DE PAGE / CONTACT -->
+  <footer id="contact" class="footer">
+    <h2>Me contacter</h2>
+    <p>Téléphone : <a href="tel:+221764455114">+221 76 445 51 14</a></p>
+    <p>Email : <a href="mailto:sobouryayaolatoundji@gmail.com">sobouryayaolatoundji@gmail.com</a></p>
 
-      const formData = {
-        titre: document.getElementById('titre').value,
-        categorie: document.getElementById('categorie').value,
-        description: document.getElementById('description').value,
-        lat: parseFloat(document.getElementById('lat').value),
-        lng: parseFloat(document.getElementById('lng').value)
-      };
+    <div class="social-links">
+      <a href="https://github.com/YOSOBOUR" target="_blank" rel="noopener">GitHub</a>
+      <span>•</span>
+      <a href="https://www.linkedin.com/in/sobour-dylan-yaya-olatoundji-146552298/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
 
-      try {
-        const res = await fetch('/signaler', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        });
+    <p class="copyright">© 2026 Sobour Dylan Yaya Olatoundji — Tous droits réservés.</p>
+  </footer>
 
-        if (res.ok) {
-          alert('Signalement transmis avec succès !');
-          fermerModal();
-          document.getElementById('form-signalement').reset();
-          chargerSignalements();
-        } else {
-          alert('Erreur lors de l\'envoi du signalement.');
-        }
-      } catch (err) {
-        console.error('Erreur envoi signalement :', err);
-      }
-    });
-  </script>
 </body>
 </html>
